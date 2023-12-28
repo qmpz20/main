@@ -1,0 +1,36 @@
+import telebot
+import webbrowser
+import configparser
+from telebot import types
+
+bot = telebot.TeleBot('6611137014:AAGtxPUCRzfKwL71-v3EkdEwDvxLfRlQ9tI')
+
+@bot.message_handler(commands=['site'])
+def site(message):
+    webbrowser.open('https://adme.media/svoboda-sdelaj-sam/20-uprazhnenij-kotorye-nauchat-koncentrirovatsya-dazhe-samyh-rasseyannyh-lyudej-1847415/?ysclid=lqnw8gqz4a345705332')
+
+@bot. message_handler(commands=['start', 'hello'])
+def main(message):
+    bot.send_message(message.chat.id, 'Привет!')
+
+@bot.message_handler(commands=['menu'])
+def menu(message):
+    markup = types.InlineKeyboardMarkup()
+    markup.add(types.InlineKeyboardButton('тайм менеджмент'))
+    markup.add(types.InlineKeyboardButton('другие упражнения'))
+    markup.add(types.InlineKeyboardButton('помощь'))
+    bot.reply_to(message, 'Чем тебе помочь?', reply_markup=markup)
+
+
+@bot. message_handler(commands=['help'])
+def main(message):
+    bot.send_message(message.chat.id, 'Help information')
+
+
+
+@bot.message_handler()
+def info(message):
+    if message.text.lower() == 'привет':
+        bot.send_message(message.chat.id, 'Привет!')
+
+bot.polling(none_stop=True)
